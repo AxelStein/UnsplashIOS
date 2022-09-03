@@ -8,17 +8,6 @@
 import UIKit
 
 class PhotoCell: UICollectionViewCell {
+    var photoId: String = ""
     @IBOutlet weak var photoView: UIImageView!
-    
-    func setPhoto(_ photo: Photo) {
-        URLSession.shared.dataTask(with: photo.smallPhotoURL) { data, res, err in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.photoView.image = image
-                }
-            } else if let err = err {
-                print(err)
-            }
-        }.resume()
-    }
 }

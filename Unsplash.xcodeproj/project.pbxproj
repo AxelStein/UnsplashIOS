@@ -19,6 +19,7 @@
 		FA9BC07C28C36E86002B0194 /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BC07B28C36E86002B0194 /* AccessKey.swift */; };
 		FA9BC07E28C37168002B0194 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BC07D28C37168002B0194 /* PhotoCell.swift */; };
 		FA9BC08028C3742B002B0194 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BC07F28C3742B002B0194 /* SearchPhotosViewController.swift */; };
+		FAEFFC9728C3844B00A9A20F /* PhotoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFFC9628C3844B00A9A20F /* PhotoLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		FA9BC07B28C36E86002B0194 /* AccessKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKey.swift; sourceTree = "<group>"; };
 		FA9BC07D28C37168002B0194 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FA9BC07F28C3742B002B0194 /* SearchPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewController.swift; sourceTree = "<group>"; };
+		FAEFFC9628C3844B00A9A20F /* PhotoLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				FA9BC07228C36247002B0194 /* Photo.swift */,
 				FA9BC07728C3641C002B0194 /* Endpoint.swift */,
 				FA9BC07B28C36E86002B0194 /* AccessKey.swift */,
+				FAEFFC9628C3844B00A9A20F /* PhotoLoader.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				FA9BC08028C3742B002B0194 /* SearchPhotosViewController.swift in Sources */,
 				FA9BC07328C36247002B0194 /* Photo.swift in Sources */,
 				FA9BC07E28C37168002B0194 /* PhotoCell.swift in Sources */,
+				FAEFFC9728C3844B00A9A20F /* PhotoLoader.swift in Sources */,
 				FA9BC07628C363FD002B0194 /* SearchPhotosInteractor.swift in Sources */,
 				FA9BC07C28C36E86002B0194 /* AccessKey.swift in Sources */,
 				FA9BC05B28C361EC002B0194 /* AppDelegate.swift in Sources */,

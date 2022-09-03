@@ -13,8 +13,11 @@ struct Photo: Codable {
 }
 
 extension Photo {
-    var smallPhotoURL: URL {
-        return URL(string: urls["small"]!)!
+    var smallPhotoURL: URL? {
+        if let str = urls["small"] {
+            return URL(string: str)
+        }
+        return nil
     }
 }
 
