@@ -19,6 +19,13 @@ extension Photo {
         }
         return nil
     }
+    
+    var thumbPhotoURL: URL? {
+        if let str = urls["thumb"] {
+            return URL(string: str)
+        }
+        return nil
+    }
 }
 
 struct SearchResults: Codable {

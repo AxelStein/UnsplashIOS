@@ -8,6 +8,7 @@
 import UIKit
 
 class PhotoCell: UICollectionViewCell {
-    var photoId: String = ""
     @IBOutlet weak var photoView: UIImageView!
+    
+    var photoId: String = ""
 }
