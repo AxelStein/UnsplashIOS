@@ -42,6 +42,10 @@ class SearchPhotosViewController: UIViewController {
                     self.collectionView.reloadData()
                 case .failure(let error):
                     print(error)
+                    self.page -= 1
+                    if self.page < 1 {
+                        self.page = 1
+                    }
                 }
             }
             page += 1
