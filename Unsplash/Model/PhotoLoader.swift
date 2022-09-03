@@ -12,27 +12,21 @@ let photoLoader = PhotoLoader()
 
 class PhotoLoader {
     private let cache = NSCache<AnyObject, AnyObject>()
-    // private var loadingResponses = [URL: [(Photo, UIImage?) -> Void]]()
+    private var tasks = [URL: URLSessionDataTask]()
     
     func load(url: URL, photo: Photo, completion: @escaping (Photo, UIImage?) -> Void) {
         if let cached = cache.object(forKey: url as AnyObject) as? UIImage {
-            DispatchQueue.main.async {
-                completion(photo, cached)
-            }
+            tasks.removeValue(forKey: url)
+            completion(photo, cached)
             return
         }
-        /*
-        if loadingResponses[url] != nil {
-            loadingResponses[url]?.append(completion)
-        } else {
-            loadingResponses[url] = [completion]
-        }
-        */
         
-        URLSession.shared.dataTask(with: url) { data, res, err in
+        let task = URLSession.shared.dataTask(with: url) { data, res, err in
+            DispatchQueue.main.async {
+                self.tasks.removeValue(forKey: url)
+            }
             guard let data = data,
                   let image = UIImage(data: data),
-                  // let blocks = self.loadingResponses[url],
                   err == nil else {
                     DispatchQueue.main.async {
                         completion(photo, nil)
@@ -45,14 +39,16 @@ class PhotoLoader {
             DispatchQueue.main.async {
                 completion(photo, image)
             }
-            /*
-            for block in blocks {
-                DispatchQueue.main.async {
-                    block(photo, image)
-                }
-                return
-            }
-            */
-        }.resume()
+        }
+        tasks[url] = task
+        task.resume()
+    }
+    
+    func cancel(for url: URL) {
+        if let task = tasks[url] {
+            print("task cancelled \(url.absoluteString)")
+            task.cancel()
+            tasks.removeValue(forKey: url)
+        }
     }
 }

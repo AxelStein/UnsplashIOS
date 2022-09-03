@@ -52,6 +52,12 @@ class SearchPhotosViewController: UICollectionViewController, UICollectionViewDe
             fetch()
         }
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let url = photos[indexPath.row].smallPhotoURL {
+            photoLoader.cancel(for: url)
+        }
+    }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
