@@ -12,6 +12,12 @@ struct Photo: Codable {
     let urls: [String: String]
 }
 
+extension Photo {
+    var smallPhotoURL: URL {
+        return URL(string: urls["small"]!)!
+    }
+}
+
 struct SearchResults: Codable {
     let total: Int
     let totalPages: Int
@@ -21,5 +27,5 @@ struct SearchResults: Codable {
 struct SearchRequest {
     let query: String
     var page: Int = 1
-    var perPage: Int = 10
+    var perPage: Int = 30
 }
