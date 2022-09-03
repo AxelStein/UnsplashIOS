@@ -10,6 +10,10 @@ import Foundation
 struct Photo: Codable {
     let id: String
     let urls: [String: String]
+    let likes: Int
+    let description: String?
+    let user: User
+    // let createdAt: Date
 }
 
 extension Photo {
@@ -26,16 +30,11 @@ extension Photo {
         }
         return nil
     }
-}
-
-struct SearchResults: Codable {
-    let total: Int
-    let totalPages: Int
-    let results: [Photo]
-}
-
-struct SearchRequest {
-    let query: String
-    var page: Int = 1
-    var perPage: Int = 30
+    
+    var regularPhotoURL: URL? {
+        if let str = urls["regular"] {
+            return URL(string: str)
+        }
+        return nil
+    }
 }

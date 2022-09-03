@@ -19,6 +19,10 @@
 		FA9BC07C28C36E86002B0194 /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BC07B28C36E86002B0194 /* AccessKey.swift */; };
 		FA9BC07E28C37168002B0194 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BC07D28C37168002B0194 /* PhotoCell.swift */; };
 		FA9BC08028C3742B002B0194 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BC07F28C3742B002B0194 /* SearchPhotosViewController.swift */; };
+		FAA11FDE28C3E57A008163C6 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA11FDD28C3E57A008163C6 /* PhotoViewController.swift */; };
+		FAA11FE028C3E836008163C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA11FDF28C3E836008163C6 /* User.swift */; };
+		FAA11FE228C3E84D008163C6 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA11FE128C3E84D008163C6 /* SearchResults.swift */; };
+		FAA11FE428C3E85D008163C6 /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA11FE328C3E85D008163C6 /* SearchRequest.swift */; };
 		FAEFFC9728C3844B00A9A20F /* PhotoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEFFC9628C3844B00A9A20F /* PhotoLoader.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +41,10 @@
 		FA9BC07B28C36E86002B0194 /* AccessKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKey.swift; sourceTree = "<group>"; };
 		FA9BC07D28C37168002B0194 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FA9BC07F28C3742B002B0194 /* SearchPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewController.swift; sourceTree = "<group>"; };
+		FAA11FDD28C3E57A008163C6 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		FAA11FDF28C3E836008163C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FAA11FE128C3E84D008163C6 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		FAA11FE328C3E85D008163C6 /* SearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
 		FAEFFC9628C3844B00A9A20F /* PhotoLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				FA9BC07F28C3742B002B0194 /* SearchPhotosViewController.swift */,
+				FAA11FDD28C3E57A008163C6 /* PhotoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -107,6 +116,9 @@
 				FA9BC07728C3641C002B0194 /* Endpoint.swift */,
 				FA9BC07B28C36E86002B0194 /* AccessKey.swift */,
 				FAEFFC9628C3844B00A9A20F /* PhotoLoader.swift */,
+				FAA11FDF28C3E836008163C6 /* User.swift */,
+				FAA11FE128C3E84D008163C6 /* SearchResults.swift */,
+				FAA11FE328C3E85D008163C6 /* SearchRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,11 +208,15 @@
 				FA9BC07E28C37168002B0194 /* PhotoCell.swift in Sources */,
 				FAEFFC9728C3844B00A9A20F /* PhotoLoader.swift in Sources */,
 				FA9BC07628C363FD002B0194 /* SearchPhotosInteractor.swift in Sources */,
+				FAA11FE228C3E84D008163C6 /* SearchResults.swift in Sources */,
 				FA9BC07C28C36E86002B0194 /* AccessKey.swift in Sources */,
 				FA9BC05B28C361EC002B0194 /* AppDelegate.swift in Sources */,
 				FA9BC07828C3641C002B0194 /* Endpoint.swift in Sources */,
+				FAA11FE028C3E836008163C6 /* User.swift in Sources */,
 				FA9BC05D28C361EC002B0194 /* SceneDelegate.swift in Sources */,
+				FAA11FE428C3E85D008163C6 /* SearchRequest.swift in Sources */,
 				FA9BC07A28C36A12002B0194 /* BaseInteractor.swift in Sources */,
+				FAA11FDE28C3E57A008163C6 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

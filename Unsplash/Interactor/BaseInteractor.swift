@@ -14,6 +14,7 @@ class BaseInteractor<T: Codable> {
     init() {
         decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dataDecodingStrategy = .deferredToData
     }
     
     func launch(urlRequest: URLRequest, handler: @escaping (Result<T, Error>) -> Void) {

@@ -85,8 +85,18 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPhoto" {
+            let vc = segue.destination as! PhotoViewController
+            if let indexPath = collectionView.indexPathsForSelectedItems?.first,
+               let item = getItem(at: indexPath) {
+                vc.photo = item
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let item = getItem(at: indexPath), let url = item.thumbPhotoURL {
+        if let item = getItem(at: indexPath), let url = item.smallPhotoURL {
             photoLoader.cancel(for: url)
         }
     }
@@ -102,7 +112,7 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         cell.photoView.image = nil
 
-        if let item = getItem(at: indexPath), let url = item.thumbPhotoURL {
+        if let item = getItem(at: indexPath), let url = item.smallPhotoURL {
             cell.photoId = item.id
             photoLoader.load(url: url, photo: item) { fetchedPhoto, image in
                 if cell.photoId == fetchedPhoto.id {
