@@ -13,7 +13,7 @@ struct Photo: Codable {
     let likes: Int
     let description: String?
     let user: User
-    // let createdAt: Date
+    let createdAt: Date
 }
 
 extension Photo {

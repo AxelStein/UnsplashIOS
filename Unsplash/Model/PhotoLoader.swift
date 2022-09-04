@@ -46,7 +46,6 @@ class PhotoLoader {
     
     func cancel(for url: URL) {
         if let task = tasks[url] {
-            print("task cancelled \(url.absoluteString)")
             task.cancel()
             tasks.removeValue(forKey: url)
         }

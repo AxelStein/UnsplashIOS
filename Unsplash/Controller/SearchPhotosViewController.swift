@@ -31,7 +31,7 @@ class SearchPhotosViewController: UIViewController {
         }
         if !isFetching && (page == 1 || (page > 1 && page < pageCount)) {
             isFetching = true
-            print("loading page \(page) for query \(currentQuery)...")
+            print("loading page \(page)/\(pageCount) for query \(currentQuery)...")
             searchPhotos.invoke(SearchRequest(query: currentQuery, page: page)) { result in
                 self.isFetching = false
                 switch result {
@@ -56,12 +56,14 @@ class SearchPhotosViewController: UIViewController {
 extension SearchPhotosViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        
         let q = searchBar.text ?? ""
         if q.isEmpty {
             return
         }
+        
         currentQuery = q
-        searchBar.resignFirstResponder()
         if !photos.isEmpty {
             collectionView.scrollToItem(at: [0, 0], at: .top, animated: false)
         }
@@ -104,13 +106,6 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
             photoLoader.cancel(for: url)
         }
     }
-    
-    private func getItem(at indexPath: IndexPath) -> Photo? {
-        if photos.indices.contains(indexPath.row) {
-            return photos[indexPath.row]
-        }
-        return nil
-    }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
@@ -132,5 +127,12 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
         let width = collectionView.frame.width - CGFloat(spacing)
         let itemSize = width / CGFloat(columnCount)
         return CGSize(width: itemSize, height: itemSize)
+    }
+    
+    private func getItem(at indexPath: IndexPath) -> Photo? {
+        if photos.indices.contains(indexPath.row) {
+            return photos[indexPath.row]
+        }
+        return nil
     }
 }

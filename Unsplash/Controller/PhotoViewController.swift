@@ -13,6 +13,7 @@ class PhotoViewController: UITableViewController {
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var createdAtLabel: UILabel!
     
     var photo: Photo!
     
@@ -30,9 +31,16 @@ class PhotoViewController: UITableViewController {
                 self.photoView.image = image
             }
         }
+        createdAtLabel.text = photo.createdAt.dateText
     }
     
     override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return photoView
+    }
+    
+    
+    @IBAction func share(_ sender: Any) {
+        let vc = UIActivityViewController(activityItems: [ self.photoView.image! ], applicationActivities: nil)
+        present(vc, animated: true)
     }
 }
