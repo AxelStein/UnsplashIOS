@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotoViewController: UITableViewController {
+class PhotoViewController: UITableViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var userPhotoView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
@@ -33,11 +33,17 @@ class PhotoViewController: UITableViewController {
         }
         createdAtLabel.text = photo.createdAt.dateText
     }
-    
-    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return photoView
+
+    @IBAction func zoom(_ sender: UIPinchGestureRecognizer) {
+        if sender.state == .ended {
+            photoView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        if sender.state == .began || sender.state == .changed {
+            let scale = sender.scale
+            photoView.transform = photoView.transform.scaledBy(x: scale, y: scale)
+            sender.scale = 1
+        }
     }
-    
     
     @IBAction func share(_ sender: Any) {
         let vc = UIActivityViewController(activityItems: [ self.photoView.image! ], applicationActivities: nil)
