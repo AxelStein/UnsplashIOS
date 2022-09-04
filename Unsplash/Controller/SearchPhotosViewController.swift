@@ -10,7 +10,7 @@ import UIKit
 class SearchPhotosViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    private var nothingFoundLabel: UILabel!
+    private var nothingFoundLabel: UILabel? = nil
     
     private let searchPhotos = SearchPhotosInteractor()
     private var photos = [Photo]()
@@ -32,9 +32,11 @@ class SearchPhotosViewController: UIViewController {
         }
         if !isFetching && (page == 1 || (page > 1 && page < pageCount)) {
             isFetching = true
+            
             print("loading page \(page)/\(pageCount) for query \(currentQuery)...")
             searchPhotos.invoke(SearchRequest(query: currentQuery, page: page)) { result in
                 self.isFetching = false
+                
                 switch result {
                 case .success(let results):
                     print("loaded \(results.results.count)")
@@ -44,6 +46,7 @@ class SearchPhotosViewController: UIViewController {
                     self.setNothingFoundLabelShown(isShown: self.photos.count == 0)
                 case .failure(let error):
                     print(error)
+                    self.showSnackbar(message: error.localizedDescription)
                     self.page -= 1
                     if self.page < 1 {
                         self.page = 1
@@ -60,16 +63,18 @@ class SearchPhotosViewController: UIViewController {
             return
         }
         
-        nothingFoundLabel = UILabel()
-        nothingFoundLabel.text = "Nothing found"
-        nothingFoundLabel.textAlignment = .center
-        nothingFoundLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nothingFoundLabel)
+        let label = UILabel()
+        label.text = "Nothing found"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
         
-        let leading = nothingFoundLabel.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16)
-        let trailing = nothingFoundLabel.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16)
-        let vertical = nothingFoundLabel.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
+        let leading = label.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16)
+        let trailing = label.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16)
+        let vertical = label.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
         view.addConstraints([leading, trailing, vertical])
+        
+        nothingFoundLabel = label
     }
 }
 
