@@ -10,14 +10,15 @@ import UIKit
 class SearchPhotosViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
+    private var nothingFoundLabel: UILabel!
     
     private let searchPhotos = SearchPhotosInteractor()
-    var photos = [Photo]()
-    let columnCount = 3
-    var page = 1
-    var pageCount = -1
-    var isFetching = false
-    var currentQuery = ""
+    private var photos = [Photo]()
+    private let columnCount = 3
+    private var page = 1
+    private var pageCount = -1
+    private var isFetching = false
+    private var currentQuery = ""
     
     override func viewDidLoad() {
         collectionView.dataSource = self
@@ -40,6 +41,7 @@ class SearchPhotosViewController: UIViewController {
                     self.pageCount = results.totalPages
                     self.photos += results.results
                     self.collectionView.reloadData()
+                    self.setNothingFoundLabelShown(isShown: self.photos.count == 0)
                 case .failure(let error):
                     print(error)
                     self.page -= 1
@@ -50,6 +52,24 @@ class SearchPhotosViewController: UIViewController {
             }
             page += 1
         }
+    }
+    
+    private func setNothingFoundLabelShown(isShown: Bool) {
+        if !isShown {
+            nothingFoundLabel?.removeFromSuperview()
+            return
+        }
+        
+        nothingFoundLabel = UILabel()
+        nothingFoundLabel.text = "Nothing found"
+        nothingFoundLabel.textAlignment = .center
+        nothingFoundLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(nothingFoundLabel)
+        
+        let leading = nothingFoundLabel.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16)
+        let trailing = nothingFoundLabel.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16)
+        let vertical = nothingFoundLabel.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
+        view.addConstraints([leading, trailing, vertical])
     }
 }
 
