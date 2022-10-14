@@ -33,7 +33,7 @@ class PhotoViewController: UITableViewController, UIGestureRecognizerDelegate {
         }
         createdAtLabel.text = photo.createdAt.dateText
     }
-
+    
     @IBAction func zoom(_ sender: UIPinchGestureRecognizer) {
         if sender.state == .ended {
             photoView.transform = CGAffineTransform(scaleX: 1, y: 1)

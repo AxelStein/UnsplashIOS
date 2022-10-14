@@ -8,9 +8,9 @@
 import UIKit
 
 class SearchPhotosViewController: UIViewController {
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     private var nothingFoundLabel: UILabel? = nil
+    private let searchController = UISearchController(searchResultsController: nil)
     
     private let searchPhotos = SearchPhotosInteractor()
     private var photos = [Photo]()
@@ -21,9 +21,10 @@ class SearchPhotosViewController: UIViewController {
     private var currentQuery = ""
     
     override func viewDidLoad() {
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
         collectionView.dataSource = self
         collectionView.delegate = self
-        searchBar.delegate = self
     }
     
     private func fetch() {
@@ -101,10 +102,6 @@ extension SearchPhotosViewController: UISearchBarDelegate {
 }
 
 extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
@@ -131,11 +128,11 @@ extension SearchPhotosViewController: UICollectionViewDelegate, UICollectionView
             photoLoader.cancel(for: url)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         cell.photoView.image = nil
-
+        
         if let item = getItem(at: indexPath), let url = item.smallPhotoURL {
             cell.photoId = item.id
             photoLoader.load(url: url, photo: item) { fetchedPhoto, image in

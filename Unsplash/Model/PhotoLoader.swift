@@ -28,11 +28,11 @@ class PhotoLoader {
             guard let data = data,
                   let image = UIImage(data: data),
                   err == nil else {
-                    DispatchQueue.main.async {
-                        completion(photo, nil)
-                    }
-                    return
+                DispatchQueue.main.async {
+                    completion(photo, nil)
                 }
+                return
+            }
             
             self.cache.setObject(image, forKey: url as AnyObject, cost: data.count)
             
